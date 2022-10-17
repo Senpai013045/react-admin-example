@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Admin, Resource } from "react-admin";
+import { authProvider } from "./auth-provider";
+import { dataProvider } from "./data-provider";
+import { VehicleCreate } from "./pages/vehicles/create";
+import { VehicleEdit } from "./pages/vehicles/edit";
+import { VehicleList } from "./pages/vehicles/list";
+import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
+import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
+import { FuelCardsList } from "./pages/fuel-cards/list";
+import { FuelCardEdit } from "./pages/fuel-cards/edit";
+import { FuelCardCreate } from "./pages/fuel-cards/create";
+import { CustomLayout } from "./layout";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Admin
+      dataProvider={dataProvider}
+      authProvider={authProvider}
+      layout={CustomLayout}
+    >
+      <Resource
+        name="vehicles"
+        list={VehicleList}
+        edit={VehicleEdit}
+        create={VehicleCreate}
+        icon={DirectionsBusIcon}
+        recordRepresentation={(record) => record.plate}
+      />
+      <Resource
+        name="fuel-cards"
+        list={FuelCardsList}
+        edit={FuelCardEdit}
+        create={FuelCardCreate}
+        icon={LocalGasStationIcon}
+      />
+    </Admin>
   );
 }
 
