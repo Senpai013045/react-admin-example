@@ -31,7 +31,7 @@ export const CustomMenu = (props: MenuProps) => {
           navigate(`/${name}`);
         }}
       >
-        <ListItemIcon>{createElement(resources[name].icon)}</ListItemIcon>
+        <ListItemIcon>{createElement(resources[name]?.icon)}</ListItemIcon>
         <ListItemText
           primary={
             (resources[name].options && resources[name].options.label) || name
